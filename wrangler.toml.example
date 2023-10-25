@@ -10,9 +10,7 @@ local_protocol = "http"
 
 [vars]
 ENV = "development"
-# DATABASE_URL = "prisma://aws-us-east-1.prisma-data.com/?api_key=7TeQz79NEU3J3DU9DQyvr7btJBvPZ5z7o481bF1KsWxbgm0lDUeewVVzPZanLHYt"
-DATABASE_URL = "prisma://prisma.malang.dev/?api_key=custom-token"
-# DATABASE_URL = "prisma://eogdgzy6fhmdayh.m.pipedream.net/?api_key=custom-token"
+DATABASE_URL = "prisma://your-data-proxy-url/?api_key=custom-token"
 
 [build]
 command = "npm run build"
