@@ -1,5 +1,4 @@
 import { build } from "esbuild";
-import copy from "esbuild-plugin-copy";
 
 try {
   await build({

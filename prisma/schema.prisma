@@ -14,7 +14,7 @@ model Product {
   id        Int       @id @default(autoincrement())
   title     String    @db.VarChar(255)
   content   String?   @db.Text()
-  price     Decimal   @default(0)
+  price     Decimal   @default(0) @db.Decimal(9, 2)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }

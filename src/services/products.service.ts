@@ -1,24 +1,34 @@
 import { Product } from "@prisma/client/edge";
 import { BaseService } from "./base.service";
+import { NotFoundException } from "@src/exceptions/not-found.exception";
 
-export class ProductService extends BaseService {
+export class ProductsService extends BaseService {
   constructor(env: EnvironmentBindings) {
     super(env);
   }
 
-  public async getProduct() {
-    return await this.prismaClient.product.findMany();
-  }
-
-  public async addProduct(product: Product) {
-    return await this.prismaClient.product.create({
-      data: product,
+  public async getProduct(page: number, limit: number) {
+    return this.prismaClient.product.findManyWithPagination({
+      page,
+      limit,
     });
   }
 
-  public async editProduct(id: number, product: Product) {
+  public async addProduct({ title, content, price }: Pick<Product, "title" | "content" | "price">) {
+    return await this.prismaClient.product.create({
+      data: { title, content, price },
+    });
+  }
+
+  public async editProduct(id: number, product: Partial<Product>) {
+    const findProduct = await this.prismaClient.product.findFirst({
+      where: { id },
+    });
+    if (!findProduct) {
+      throw new NotFoundException("PRODUCT_NOT_FOUND", "Product not found");
+    }
     return await this.prismaClient.product.update({
-      data: product,
+      data: { ...findProduct, ...product },
       where: { id },
     });
   }
