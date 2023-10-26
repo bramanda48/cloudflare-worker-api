@@ -78,7 +78,7 @@ const deleteProduct: Handler<Environment> = async (c) => {
   const productService = new ProductsService(c.env);
   const responseFormat = new ResponseFormat(c);
 
-  const product = await productService.deleteProduct(params.id);
+  await productService.deleteProduct(params.id);
   return responseFormat
     .withRequestData({
       timestamp: new Date(),
@@ -86,16 +86,12 @@ const deleteProduct: Handler<Environment> = async (c) => {
       path: c.req.path,
       params,
     })
-    .json(product, Http.Ok);
-};
-
-const uploadImageProduct: Handler<Environment> = (c) => {
-  return c.json(
-    {
-      hello: "world",
-    },
-    Http.Ok,
-  );
+    .json(
+      {
+        id: params.id,
+      },
+      Http.Ok,
+    );
 };
 
 export const ProductsController = {
@@ -103,5 +99,4 @@ export const ProductsController = {
   addProduct,
   editProduct,
   deleteProduct,
-  uploadImageProduct,
 };

@@ -7,7 +7,6 @@ const route = new Hono<Environment>();
 route.get("/", ProductsController.getProduct);
 route.get("/:id", ProductsController.getProduct);
 route.post("/", ProductsController.addProduct);
-route.post("/image", ProductsController.uploadImageProduct);
 route.put("/:id", ProductsController.editProduct);
 route.delete("/:id", ProductsController.deleteProduct);
 
