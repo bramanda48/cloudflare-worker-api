@@ -13,7 +13,7 @@ export const errorHandler: ErrorHandler<Environment> = async (err: any, c) => {
   let errors: IExceptionMessage[] = [];
   let exception: BaseException;
   let bodyParse: object = c.req.method !== "GET" ? await c.req.json() : {};
-  console.log(err);
+
   if (err instanceof ZodError) {
     exception = new BadRequestException();
     err.errors.forEach((x) =>

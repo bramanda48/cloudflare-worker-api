@@ -1,6 +1,6 @@
 import { Product } from "@prisma/client/edge";
-import { BaseService } from "./base.service";
 import { NotFoundException } from "@src/exceptions/not-found.exception";
+import { BaseService } from "./base.service";
 
 export class ProductsService extends BaseService {
   constructor(env: EnvironmentBindings) {

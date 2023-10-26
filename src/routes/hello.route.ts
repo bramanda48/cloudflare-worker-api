@@ -1,5 +1,5 @@
-import { Hono } from "hono";
 import { HelloController } from "@src/controllers/hello.controller";
+import { Hono } from "hono";
 
 const route = new Hono<Environment>();
 

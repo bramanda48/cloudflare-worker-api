@@ -1,5 +1,5 @@
-import { Handler } from "hono";
 import { Http } from "@status/codes";
+import { Handler } from "hono";
 
 const getHello: Handler<Environment> = async (c) => {
   return c.json(
