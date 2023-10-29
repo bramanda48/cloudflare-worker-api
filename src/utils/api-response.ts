@@ -9,7 +9,7 @@ export class ResponseFormat<T = any> {
     statusCode: number;
     data?: T | null;
     errors?: IExceptionMessage[];
-    metadata?: IMetadataFormat | null;
+    metadata?: IMetadataFormat;
   } = {
     statusCode: Http.Ok,
   };
