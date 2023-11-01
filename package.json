@@ -10,9 +10,7 @@
     "build": "node ./build.js",
     "dev": "wrangler dev ./dist/index.mjs --live-reload",
     "format": "prettier --write .",
-    "deploy": "wrangler deploy --env development",
-    "deploy:data-proxy:up": "docker compose -f ./prisma-data-proxy/docker-compose.yaml up -d",
-    "deploy:data-proxy:down": "docker compose -f ./prisma-data-proxy/docker-compose.yaml down"
+    "deploy": "wrangler deploy --env development"
   },
   "author": "Bramand Suwandi <bram@malang.dev>",
   "license": "MIT",
