@@ -52,7 +52,7 @@ export const notFoundHandler: NotFoundHandler<Environment> = async (c) => {
   const responseFormat = new ResponseFormat<object>(c);
   const exception: BaseException = new NotFoundException();
   const errors: IExceptionMessage[] = [];
-  const bodyParse: object = await c.req.json();
+  const bodyParse: object = c.req.method !== "GET" ? await c.req.json() : {};
 
   errors.push(new IExceptionMessage(exception.codes, exception.message, exception.stack));
   return responseFormat
@@ -60,7 +60,7 @@ export const notFoundHandler: NotFoundHandler<Environment> = async (c) => {
       timestamp: new Date(),
       method: c.req.method,
       path: c.req.path,
-      body: c.req.method !== "GET" ? bodyParse : {},
+      body: bodyParse,
       params: c.req.param(),
       query: c.req.query(),
     })
