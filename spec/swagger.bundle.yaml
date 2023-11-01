@@ -18,7 +18,7 @@ tags:
   - name: Product
     description: Everything about the Products
 servers:
-  - url: 'https://cloudflare-worker-api-development.bramanda48.workers.dev/v1'
+  - url: 'https://cloudflare-worker-api.bramanda48.workers.dev/v1'
   - url: 'http://localhost:3000/v1'
 components:
   schemas:

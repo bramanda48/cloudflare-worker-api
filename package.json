@@ -10,7 +10,7 @@
     "build": "node ./build.js",
     "dev": "wrangler dev ./dist/index.mjs --live-reload",
     "format": "prettier --write .",
-    "deploy": "wrangler deploy --env development"
+    "deploy": "wrangler deploy"
   },
   "author": "Bramand Suwandi <bram@malang.dev>",
   "license": "MIT",
