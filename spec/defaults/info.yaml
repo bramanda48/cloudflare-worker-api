@@ -1,0 +1,14 @@
+title: Cloudflare Worker API
+description: |-
+  Starter to building RESTful APIs using Cloudflare Worker, Hono and Prisma.
+
+  Some useful links:
+  - [Hono documentation](https://hono.dev)
+  - [Prisma data proxy](https://www.prisma.io/docs/data-platform/classic-projects/data-proxy)
+  - [How to create Data Proxy Projects ?](https://www.prisma.io/docs/data-platform/classic-projects/platform/projects/create)
+contact:
+  email: bram@malang.dev
+license:
+  name: MIT
+  url: https://www.mit.edu/~amini/LICENSE.md
+version: 1.0.0

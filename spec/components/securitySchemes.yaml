@@ -1,0 +1,5 @@
+ApiKey:
+  description: API key for all endpoints
+  type: apiKey
+  in: header
+  name: X-API-Key

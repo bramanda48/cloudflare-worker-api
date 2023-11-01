@@ -1,0 +1,15 @@
+# Reusable schemas (data models)
+schemas:
+  $ref: ./schemas/index.yaml
+
+# Security scheme definitions (see Authentication)
+# securitySchemes:
+#  $ref: ./securitySchemes.yaml
+
+# Reusable request bodies
+requestBodies:
+  $ref: ./requestBodies.yaml
+
+# Reusable responses
+responses:
+  $ref: './responses.yaml'

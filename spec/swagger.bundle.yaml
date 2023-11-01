@@ -1,0 +1,297 @@
+openapi: 3.0.3
+info:
+  title: Cloudflare Worker API
+  description: |-
+    Starter to building RESTful APIs using Cloudflare Worker, Hono and Prisma.
+
+    Some useful links:
+    - [Hono documentation](https://hono.dev)
+    - [Prisma data proxy](https://www.prisma.io/docs/data-platform/classic-projects/data-proxy)
+    - [How to create Data Proxy Projects ?](https://www.prisma.io/docs/data-platform/classic-projects/platform/projects/create)
+  contact:
+    email: bram@malang.dev
+  license:
+    name: MIT
+    url: 'https://www.mit.edu/~amini/LICENSE.md'
+  version: 1.0.0
+tags:
+  - name: Product
+    description: Everything about the Products
+servers:
+  - url: 'https://cloudflare-worker-api-development.bramanda48.workers.dev/v1'
+  - url: 'http://localhost:3000/v1'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        title:
+          type: string
+          example: Product 1
+        content:
+          type: string
+          example: Harga yang tertera adalah harga per piece.
+        price:
+          type: number
+          format: int32
+          example: 10000
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ResponseFormat:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 200
+        metadata:
+          type: object
+          properties:
+            request:
+              $ref: '#/components/schemas/IRequestMetadata'
+            pagination:
+              type: object
+              nullable: true
+    ResponseFormatWithPagination:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 200
+        metadata:
+          type: object
+          properties:
+            request:
+              $ref: '#/components/schemas/IRequestMetadata'
+            pagination:
+              nullable: true
+              $ref: '#/components/schemas/IPaginationMetadata'
+    IRequestMetadata:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        method:
+          type: string
+          example: GET
+        path:
+          type: string
+          example: /request-path
+        params:
+          type: object
+          example: {}
+        query:
+          type: object
+          example: {}
+        body:
+          type: object
+          example: {}
+    IPaginationMetadata:
+      type: object
+      properties:
+        limit:
+          type: number
+          example: 10
+        totalData:
+          type: number
+          example: 50
+        totalPage:
+          type: number
+          example: 5
+        nextPage:
+          type: number
+          example: 1
+        prevPage:
+          type: number
+          example: 3
+  requestBodies:
+    AddProductBody:
+      description: A JSON object containing product information
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                example: Product 1
+              content:
+                type: string
+                example: Harga yang tertera adalah harga per piece.
+              price:
+                type: number
+                format: int32
+                example: 10000
+    UpdateProductBody:
+      description: A JSON object containing product information
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                example: Product 1
+              content:
+                type: string
+                example: Harga yang tertera adalah harga per piece.
+              price:
+                type: number
+                format: int32
+                example: 10000
+  responses:
+    Error:
+      description: Default Error Responses
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                format: int32
+                example: 400
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      example: VALIDATION_ERROR
+                    message:
+                      type: string
+                      example: Value of price ~ Invalid number
+                    stack:
+                      type: string
+                      example: 'Error: Bad Request at Nc (file://index.js:11447:35)'
+              metadata:
+                type: object
+                properties:
+                  request:
+                    $ref: '#/components/schemas/IRequestMetadata'
+                  pagination:
+                    nullable: true
+paths:
+  /product:
+    get:
+      tags:
+        - Product
+      summary: Get all available product
+      operationId: getProduct
+      parameters:
+        - in: query
+          name: page
+          description: Page number
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          description: The numbers of items to return.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: '#/components/schemas/ResponseFormatWithPagination'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Product'
+        '400':
+          $ref: '#/components/responses/Error'
+    post:
+      tags:
+        - Product
+      summary: Add new product
+      operationId: addProduct
+      requestBody:
+        $ref: '#/components/requestBodies/AddProductBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: '#/components/schemas/ResponseFormat'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Product'
+        '400':
+          $ref: '#/components/responses/Error'
+  '/product/{id}':
+    put:
+      tags:
+        - Product
+      summary: Update product
+      operationId: updateProduct
+      parameters:
+        - in: path
+          name: id
+          description: Product id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateProductBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: '#/components/schemas/ResponseFormat'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Product'
+        '400':
+          $ref: '#/components/responses/Error'
+    delete:
+      tags:
+        - Product
+      summary: Delete a product
+      operationId: deleteProduct
+      parameters:
+        - in: path
+          name: id
+          description: Product id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+        '400':
+          $ref: '#/components/responses/Error'

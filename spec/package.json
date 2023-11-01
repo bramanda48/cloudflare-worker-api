@@ -1,0 +1,19 @@
+{
+  "name": "swagger-spec",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "bramanda48",
+  "license": "MIT",
+  "keywords": [
+    "swagger",
+    "oas3",
+    "multifile"
+  ],
+  "scripts": {
+    "bundle": "swagger-cli bundle ./swagger.yaml -t yaml -o swagger.bundle.yaml",
+    "validate": "swagger-cli validate ./swagger.yaml"
+  },
+  "devDependencies": {
+    "@apidevtools/swagger-cli": "^4.0.4"
+  }
+}

@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  $ref: ../defaults/info.yaml
+
+tags:
+  $ref: ../defaults/tags.yaml
+
+servers:
+  $ref: ../defaults/servers.yaml
+
+components:
+  $ref: ../components/index.yaml
+
+paths:
+  /product:
+    get:
+      tags:
+        - Product
+      summary: Get all available product
+      operationId: getProduct
+      parameters:
+        - in: query
+          name: page
+          description: Page number
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          description: The numbers of items to return.
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResponseFormatWithPagination"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Product"
+        400:
+          $ref: "#/components/responses/Error"
+
+    post:
+      tags:
+        - Product
+      summary: Add new product
+      operationId: addProduct
+      requestBody:
+        $ref: "#/components/requestBodies/AddProductBody"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResponseFormat"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Product"
+        400:
+          $ref: "#/components/responses/Error"
+
+  /product/{id}:
+    put:
+      tags:
+        - Product
+      summary: Update product
+      operationId: updateProduct
+      parameters:
+        - in: path
+          name: id
+          description: Product id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: "#/components/requestBodies/UpdateProductBody"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/ResponseFormat"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Product"
+        400:
+          $ref: "#/components/responses/Error"
+
+    delete:
+      tags:
+        - Product
+      summary: Delete a product
+      operationId: deleteProduct
+      parameters:
+        - in: path
+          name: id
+          description: Product id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+        400:
+          $ref: "#/components/responses/Error"

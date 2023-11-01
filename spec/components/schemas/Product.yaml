@@ -1,0 +1,23 @@
+Product:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int32
+      example: 1
+    title:
+      type: string
+      example: "Product 1"
+    content:
+      type: string
+      example: "Harga yang tertera adalah harga per piece."
+    price:
+      type: number
+      format: int32
+      example: 10000
+    createdAt:
+      type: string
+      format: date-time
+    updatedAt:
+      type: string
+      format: date-time

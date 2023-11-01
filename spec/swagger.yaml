@@ -1,0 +1,18 @@
+openapi: 3.0.3
+info:
+  $ref: ./defaults/info.yaml
+
+tags:
+  $ref: ./defaults/tags.yaml
+
+servers:
+  $ref: ./defaults/servers.yaml
+
+components:
+  $ref: ./components/index.yaml
+
+paths:
+  /product:
+    $ref: "./paths/product.yaml#/paths/~1product"
+  /product/{id}:
+    $ref: "./paths/product.yaml#/paths/~1product~1{id}"

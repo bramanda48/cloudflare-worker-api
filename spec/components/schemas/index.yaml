@@ -1,0 +1,13 @@
+# Schema
+Product:
+  $ref: ./Product.yaml#/Product
+
+# Response format and metadata
+ResponseFormat:
+  $ref: ./ResponseFormat.yaml#/ResponseFormat
+ResponseFormatWithPagination:
+  $ref: ./ResponseFormat.yaml#/ResponseFormatWithPagination
+IRequestMetadata:
+  $ref: ./ResponseMetadata.yaml#/IRequestMetadata
+IPaginationMetadata:
+  $ref: ./ResponseMetadata.yaml#/IPaginationMetadata

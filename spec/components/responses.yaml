@@ -1,0 +1,32 @@
+Error:
+  description: Default Error Responses
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int32
+            example: 400
+          errors:
+            type: array
+            items:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: "VALIDATION_ERROR"
+                message:
+                  type: string
+                  example: "Value of price ~ Invalid number"
+                stack:
+                  type: string
+                  example: "Error: Bad Request at Nc (file://index.js:11447:35)"
+          metadata:
+            type: object
+            properties:
+              request:
+                $ref: ./schemas/index.yaml#/IRequestMetadata
+              pagination:
+                nullable: true

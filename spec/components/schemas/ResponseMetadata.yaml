@@ -1,0 +1,40 @@
+IRequestMetadata:
+  type: object
+  properties:
+    timestamp:
+      type: string
+      format: date-time
+    method:
+      type: string
+      example: "GET"
+    path:
+      type: string
+      example: "/request-path"
+    params:
+      type: object
+      example: {}
+    query:
+      type: object
+      example: {}
+    body:
+      type: object
+      example: {}
+      
+IPaginationMetadata:
+  type: object
+  properties:
+    limit:
+      type: number
+      example: 10
+    totalData:
+      type: number
+      example: 50
+    totalPage:
+      type: number
+      example: 5
+    nextPage:
+      type: number
+      example: 1
+    prevPage:
+      type: number
+      example: 3

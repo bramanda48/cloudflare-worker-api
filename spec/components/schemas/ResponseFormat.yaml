@@ -1,0 +1,31 @@
+ResponseFormat:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      format: int32
+      example: 200
+    metadata:
+      type: object
+      properties:
+        request:
+          $ref: ./index.yaml#/IRequestMetadata
+        pagination:
+          type: object
+          nullable: true
+
+ResponseFormatWithPagination:
+  type: object
+  properties:
+    statusCode:
+      type: integer
+      format: int32
+      example: 200
+    metadata:
+      type: object
+      properties:
+        request:
+          $ref: ./index.yaml#/IRequestMetadata
+        pagination:
+          nullable: true
+          $ref: ./index.yaml#/IPaginationMetadata

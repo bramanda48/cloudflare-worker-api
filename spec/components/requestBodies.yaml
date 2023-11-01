@@ -1,0 +1,37 @@
+AddProductBody:
+  description: A JSON object containing product information
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            type: string
+            example: "Product 1"
+          content:
+            type: string
+            example: "Harga yang tertera adalah harga per piece."
+          price:
+            type: number
+            format: int32
+            example: 10000
+
+UpdateProductBody:
+  description: A JSON object containing product information
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            type: string
+            example: "Product 1"
+          content:
+            type: string
+            example: "Harga yang tertera adalah harga per piece."
+          price:
+            type: number
+            format: int32
+            example: 10000

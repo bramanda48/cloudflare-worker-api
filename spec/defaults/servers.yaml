@@ -1,0 +1,2 @@
+- url: https://cloudflare-worker-api-development.bramanda48.workers.dev/v1
+- url: http://localhost:3000/v1
