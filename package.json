@@ -1,7 +1,7 @@
 {
   "name": "cloudflare-worker-api",
   "version": "1.0.0",
-  "description": "Starter to building RESTful APIs using Cloudflare Worker, Hono and Prisma",
+  "description": "Sample RESTful APIs using Cloudflare Worker, Hono and Prisma",
   "type": "module",
   "scripts": {
     "wrangler": "wrangler",
